@@ -24,7 +24,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".TermsandConditionActivity">
+        <activity android:name=".TermsandConditionActivity"
+            android:theme="@style/AppTheme2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -32,8 +33,10 @@
         </activity>
 
         <meta-data android:name="com.google.android.gms.ads.AD_MANAGER_APP" android:value="true"/>
-        <activity android:name=".SelectCountry"/>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".SelectCountry"
+            android:theme="@style/AppTheme2"/>
+        <activity android:name=".MainActivity"
+            android:theme="@style/AppTheme2"/>
 
         <activity
             android:name=".ListDataActivity"

@@ -96,6 +96,9 @@ public class MainActivity extends AppCompatActivity implements  BillingProcessor
     ImageView btngenerate;
     ImageView btnscanwifi;
     ImageView btnsetting;
+
+    ImageView imgSelectLanguage,imgNoAds;
+
     Activity activity;
     SharedPreferences preferences;
     // EditText pass;
@@ -218,6 +221,9 @@ public class MainActivity extends AppCompatActivity implements  BillingProcessor
         Share = findViewById(R.id.tv_Share);
         Info = findViewById(R.id.tv_wifiIfo);
 
+        imgSelectLanguage = findViewById(R.id.select_languages);
+        imgNoAds = findViewById(R.id.no_ads);
+
 
         Bundle bundle = getIntent().getExtras();
         Paper.init(this);
@@ -225,15 +231,29 @@ public class MainActivity extends AppCompatActivity implements  BillingProcessor
 
         //////sherry commit
 
-        bp = new BillingProcessor(this, null, this);
+        bp = new BillingProcessor(this,getString(R.string.license_key) , this);
         bp.initialize();
 
 
-        if(bp.isPurchased("android.test.purchased")){
+        if(bp.isPurchased(getString(R.string.original_product_id))){
 
             InAppPrefManager.getInstance(getApplicationContext()).setInAppStatus(true);
         }
 
+
+        if (!InAppPrefManager.getInstance(getApplicationContext()).getInAppStatus()) {
+
+            Animation animation = new AlphaAnimation(1, 0); //to change visibility from visible to invisible
+            animation.setDuration(200); //1 second duration for each animation cycle
+            animation.setInterpolator(new LinearInterpolator());
+            animation.setRepeatCount(Animation.INFINITE); //repeating indefinitely
+            animation.setRepeatMode(Animation.REVERSE); //animation will start from end point once ended.
+            imgNoAds.startAnimation(animation);
+
+            imgNoAds.setVisibility(View.VISIBLE);
+        }else{
+            imgNoAds.setVisibility(View.INVISIBLE);
+        }
 
 
 //
@@ -296,8 +316,8 @@ public class MainActivity extends AppCompatActivity implements  BillingProcessor
                 updateView(Paper.book().read("language"));
             }
             else if (bundle.getString("language").equals("eng")) {
-               // Paper.book().write("language", "en");
-               // updateView(Paper.book().read("language"));
+                Paper.book().write("language", "en");
+                updateView(Paper.book().read("language"));
             }
         }
 
@@ -467,7 +487,7 @@ public class MainActivity extends AppCompatActivity implements  BillingProcessor
 //                            .PERMISSION_GRANTED)) {
 //                        Toast.makeText(MainActivity.this, "Allow location permission to show available wifi", Toast.LENGTH_LONG).show();
 //                        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-//                        Uri uri = Uri.fromParts("package", getPackageName(), null);
+//                        Uri uri = Uri.frFonomParts("package", getPackageName(), null);
 //                        intent.setData(uri);
 //                        startActivityForResult(intent, 4);
 //                    }
@@ -642,6 +662,33 @@ public class MainActivity extends AppCompatActivity implements  BillingProcessor
                     startActivity(i);
 
                 }
+            }
+        });
+
+
+        imgSelectLanguage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                SharedPreferences  prefFirsTime = getSharedPreferences("PREFSs", 0);
+                SharedPreferences.Editor editor = prefFirsTime.edit();
+                editor.putString("firsttimedisp","no");
+                editor.apply();
+                // String chk = prefFirsTime.getString("firsttimedisp", "0");
+
+                startActivity(new Intent(MainActivity.this,SelectCountry.class));
+
+
+            }
+        });
+
+
+
+        imgNoAds.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                bp.purchase(MainActivity.this, getString(R.string.original_product_id));
             }
         });
 
@@ -1141,6 +1188,8 @@ public class MainActivity extends AppCompatActivity implements  BillingProcessor
         }
         frameLayout.setVisibility(View.INVISIBLE);
 
+       imgNoAds.setVisibility(View.INVISIBLE);
+
         //banner.setVisibility(View.INVISIBLE);
         //populateUnifiedNativeAdView(null,null);
 
@@ -1149,9 +1198,10 @@ public class MainActivity extends AppCompatActivity implements  BillingProcessor
     @Override
     public void onPurchaseHistoryRestored() {
 
-        if(bp.isPurchased(getString(R.string.test_product_id))){
+        if(bp.isPurchased(getString(R.string.original_product_id))){
 
             InAppPrefManager.getInstance(getApplicationContext()).setInAppStatus(true);
+            imgNoAds.setVisibility(View.INVISIBLE);
         }
 
     }
@@ -1235,12 +1285,12 @@ public class MainActivity extends AppCompatActivity implements  BillingProcessor
                 public void onClick(View view) {
 
                     //  String str = getString(R.string.test_product_id);
-                    bp.purchase(MainActivity.this, getString(R.string.test_product_id));
+                    bp.purchase(MainActivity.this, getString(R.string.original_product_id));
                     // Toast.makeText(getApplicationContext(), "in app active",Toast.LENGTH_LONG).show();
 
                 }
             });
-            menu.getItem(0).setActionView(image); //item in the 0 position
+            menu.getItem(1).setActionView(image); //item in the 0 position
 
             // anim.setDuration(700000);
             Animation animation = new AlphaAnimation(1, 0); //to change visibility from visible to invisible
@@ -1248,7 +1298,7 @@ public class MainActivity extends AppCompatActivity implements  BillingProcessor
             animation.setInterpolator(new LinearInterpolator());
             animation.setRepeatCount(Animation.INFINITE); //repeating indefinitely
             animation.setRepeatMode(Animation.REVERSE); //animation will start from end point once ended.
-            menu.getItem(0).getActionView().startAnimation(animation);
+            menu.getItem(1).getActionView().startAnimation(animation);
             // menu.getItem(1).getActionView().startAnimation(anim);
             mShouldAnimateMenuItem = false;
 
@@ -1260,7 +1310,15 @@ public class MainActivity extends AppCompatActivity implements  BillingProcessor
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.noads:{
+            case R.id.change_language:{
+
+              SharedPreferences  prefFirsTime = getSharedPreferences("PREFSs", 0);
+                SharedPreferences.Editor editor = prefFirsTime.edit();
+                editor.putString("firsttimedisp","no");
+                editor.apply();
+               // String chk = prefFirsTime.getString("firsttimedisp", "0");
+
+                startActivity(new Intent(MainActivity.this,SelectCountry.class));
 
                 // Toast.makeText(getApplicationContext(), "in app active",Toast.LENGTH_LONG).show();
                 // bp.purchase(MainActivity.this, "android.test.purchased");

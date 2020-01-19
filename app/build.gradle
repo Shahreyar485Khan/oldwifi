@@ -7,8 +7,8 @@ android {
         applicationId "com.internet.speed.test.analyzer.wifi.key.generator.app"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 15
-        versionName "1.0.15"
+        versionCode 16
+        versionName "1.0.16"
         aaptOptions.cruncherEnabled = false
         aaptOptions.useNewCruncher = false
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

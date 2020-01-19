@@ -5,24 +5,26 @@
 
     <!--    TEST ADS -->
 
-            <string name="app_id" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
+          <!--  <string name="app_id" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
             <string name="Banner" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
             <string name="Interstitial" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
-            <string name="nativead" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
+            <string name="nativead" translatable="false">ca-app-pub-3940256099942544/2247696110</string>-->
 
     <string name="test_product_id" translatable="false" >android.test.purchased</string>
+    <string name="original_product_id" translatable="false" >wifi_product_id</string>
+    <string name="license_key" translatable="false" >MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnYnyohjpLClvq57xNZsAlGdcpN+cFI1/3bKMRdin3cKPU8jzNA7MPldDsxt3zeGhkPIpRkffBfkB2/E2apEmnbgEvc1AsFnzigUtKqi10rApDArV412pJAZRFED/eMMRURyg247nj1WUjri7014f8OclwNCHXRjRBDjkcSG731rBsKKCvthG0903VEcihxTAxHd4hV+Gpy5fNaokwGINjvId2Hb22u7+vgY+OHm5lyWIeTNCP8IIYPHfZiv0aDj8I7W8QtgYmkAndltA/loga6b7zP2bySQ+pHbGL3Uw9hIQsC4qhb8aQuzz1d2g/dwu/pHAgIshgaN/LL+s0CZ7TQIDAQAB</string>
 
 
 
 <!--    ORIGINAL ADS-->
 
 
-    <!--<string name="nativead">ca-app-pub-7796659861450905/4006416168</string>
+    <string name="nativead">ca-app-pub-7796659861450905/4006416168</string>
     <string name="app_id">ca-app-pub-7796659861450905~6965662202</string>
 
-    &lt;!&ndash;    New Original Ads&ndash;&gt;
+    <!--    New Original Ads-->
     <string name="Banner">ca-app-pub-7796659861450905/7480667527</string>
-    <string name="Interstitial">ca-app-pub-7796659861450905/2228340847</string>-->
+    <string name="Interstitial">ca-app-pub-7796659861450905/2228340847</string>
 
     <string name="term1">Our product i.e. (WIFI PASSWORD MASTER-SHOW ALL PASSWORD) asks user to grant certain permissions that are required for the app to perform its actions properly. As the application helps the user to scan wifi, internet speed uploading and downloading, generate password, show password etc. it needs special privileges. We ensure you that the users personal data or information is not collected by the company nor does the application host users data.</string>
     <string name="terms2">The application requires the user to agree certain permission and rules to access. This access is used by the application in the following ways:</string>
