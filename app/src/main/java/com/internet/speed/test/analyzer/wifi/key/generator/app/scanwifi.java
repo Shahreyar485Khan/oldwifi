@@ -91,13 +91,13 @@ public class scanwifi extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scanwifi);
-        MobileAds.initialize(this, getResources().getString(R.string.app_id));
+
 
         banner = findViewById(R.id.banner_ad);
         mDatabaseHelper = new DatabaseHelper(this);
 
         preferences = getSharedPreferences("PREFS", 0);
-
+        MobileAds.initialize(this, getResources().getString(R.string.app_id));
         if (!InAppPrefManager.getInstance(scanwifi.this).getInAppStatus()) {
             adview();
         }
